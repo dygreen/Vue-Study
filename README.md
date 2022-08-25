@@ -1,24 +1,9 @@
-# vuedongsan
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Vuedongsan
+> [Vue] 공부 정리
+>
+> [2022.08.25 ~ ]
+***
+## 공부 내용 ✏
+* HTML에 데이터바인딩 {{데이터}} (state관리)
+* v-for 반복문으로 데이터바인딩
+* v-if 문법으로 모달창 만들기
