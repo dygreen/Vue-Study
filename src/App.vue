@@ -1,13 +1,22 @@
 <template>
-
   <!-- 모달창 -->
   <div class="black-bg" v-if="모달창열렸니 == true">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <h4>{{ 원룸들[누른상품번호].title }}</h4>
+      <p>{{ 원룸들[누른상품번호].content }}</p>
+      <img :src="원룸들[누른상품번호].image" class="room-img">
+      <p>{{ 원룸들[누른상품번호].price }}</p>
       <button @click="모달창열렸니 = false">X</button>
     </div>
   </div>
+
+  <!-- v-if 와 v-else-if 와 v-else
+  : v-if가 참이 아니면 v-else를 보여주세요
+  <div v-if="1 == 2">안녕하세요</div>
+  <div v-else-if="1 == 3">안녕하세요2</div>
+  <div v-else>안녕하세요3</div>
+  -->
+
 
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
@@ -53,17 +62,27 @@
     <span>신고수 : {{신고수[1]}}</span>
   </div>
   <div>
-    <img src="./assets/room2.jpg" class="room-img">
-    <h4>{{ products[2] }}</h4>
-    <p>가격은 아무거나</p>
-    <button @click="신고수[2]++">허위매물신고</button>
-    <span>신고수 : {{신고수[2]}}</span>
+    <img :src="원룸들[2].image" class="room-img">
+<!--    <h4>{{ products[2] }}</h4>-->
+    <h4>{{ 원룸들[2].title }}</h4>
+    <p>{{ 원룸들[2].price }}원</p>
+<!--    <button @click="신고수[2]++">허위매물신고</button>
+    <span>신고수 : {{신고수[2]}}</span>-->
+  </div>
+
+  <!-- 반복문으로 6개 상품 나열하기 -->
+  <div v-for="(a,i) in 원룸들" :key="i">
+    <img :src="원룸들[i].image" class="room-img">
+    <h4 @click="모달창열렸니 = true; 누른상품번호 = i;">{{ 원룸들[i].title }}</h4>
+    <p>{{ 원룸들[i].price }}원</p>
   </div>
 </template>
 
 
 
 <script>
+import data from './assets/oneroom';
+
 export default {
   name: 'App',
   data(){
@@ -75,8 +94,10 @@ export default {
       스타일 : 'color : blue',
       신고수 : [0,0,0],
       모달창열렸니 : false,
+      누른상품번호 : 0,
 
       products : ['역삼동원룸','천호동원룸','마포구원룸'],
+      원룸들 : data,
     }
   },
 
