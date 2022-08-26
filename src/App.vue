@@ -1,15 +1,7 @@
 <template>
   <!-- 모달창 -->
-  <div class="black-bg" v-if="모달창열렸니 == true">
-    <div class="white-bg">
-      <h4>{{ 원룸들[누른상품번호].title }}</h4>
-      <p>{{ 원룸들[누른상품번호].content }}</p>
-      <img :src="원룸들[누른상품번호].image" class="room-img">
-      <p>{{ 원룸들[누른상품번호].price }}</p>
-      <button @click="모달창열렸니 = false">X</button>
-    </div>
-  </div>
-
+  <Modal :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른상품번호 = $event" />
+<!--  @openModal="모달창열렸니 = true; 누른상품번호 = $event"-->
   <!-- v-if 와 v-else-if 와 v-else
   : v-if가 참이 아니면 v-else를 보여주세요
   <div v-if="1 == 2">안녕하세요</div>
@@ -17,6 +9,15 @@
   <div v-else>안녕하세요3</div>
   -->
 
+  <!-- props보내고 싶을 때 => 콜론을 안붙이면 문자로 전달됨
+   작명 = "문자자료"
+   :작명 = "숫자자료"
+
+  <Discount :데이터이름="[1,2,3]" />
+  <Discount :데이터이름="{ age:20 }" />
+  <Discount :데이터이름="100" />
+  <Discount 데이터이름="안녕하쇼" />
+   -->
 
   <div class="menu">
     <a v-for="작명 in 메뉴들" :key="작명">{{작명}}</a>
@@ -32,12 +33,18 @@
     -->
   </div>
 
-
   <!--  <div v-for="room in products" :key="room">
     <h4>{{ room }}</h4>
     <p>{{ price2 }}만원</p>
   </div>-->
 
+  <!-- 이벤트 -->
+  <Discount/>
+  <!--
+   HTML 한 단어로 줄이고 싶으면 Component 만들기
+   1. vue 파일 만들어서 HTML 넣고
+   2. 원하는 곳에서 그 파일 import/등록/사용
+   -->
 
   <div>
     <img src="./assets/room0.jpg" class="room-img">
@@ -71,17 +78,18 @@
   </div>
 
   <!-- 반복문으로 6개 상품 나열하기 -->
-  <div v-for="(a,i) in 원룸들" :key="i">
-    <img :src="원룸들[i].image" class="room-img">
-    <h4 @click="모달창열렸니 = true; 누른상품번호 = i;">{{ 원룸들[i].title }}</h4>
-    <p>{{ 원룸들[i].price }}원</p>
-  </div>
+  <Cards :원룸="원룸들[i]" v-for="(a,i) in 원룸들" :key="i" @openModal="모달창열렸니 = true; 누른상품번호 = $event" />
+  <!-- 자식이 보낸 데이터는 $event 변수에 담겨있음 -->
+
 </template>
 
 
 
 <script>
-import data from './assets/oneroom';
+import data from './assets/oneroom.js';
+import Discount from "./Discount.vue";
+import Modal from "./Modal.vue";
+import Cards from "./Cards.vue";
 
 export default {
   name: 'App',
@@ -107,7 +115,10 @@ export default {
     }
   },
 
-  components: {
+  components: { /*컴포넌트 등록*/
+    Discount : Discount,
+    Modal : Modal,
+    Cards : Cards,
   }
 }
 </script>
@@ -161,6 +172,5 @@ div {
   color: white;
   padding: 10px;
 }
-
 
 </style>

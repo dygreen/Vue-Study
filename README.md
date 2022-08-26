@@ -47,3 +47,22 @@ export default {
   </div>
 </div>
 ```
+* Component 분리하고, props로 데이터 전달하여 띄우기
+```vue
+<Cards :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니"/>
+
+<script>
+  import Cards from "./Cards.vue";
+
+  export default {
+    name: 'App',
+
+    components: { /*컴포넌트 등록*/
+      Discount : Discount,
+      Modal : Modal,
+      Cards : Cards,
+    }
+  }
+</script>
+```
+* Custom event(`$emit`, `@click`) 문법으로 props값 변경하기
