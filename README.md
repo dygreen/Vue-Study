@@ -66,3 +66,28 @@ export default {
 </script>
 ```
 * Custom event(`$emit`, `@click`) 문법으로 props값 변경하기
+* CSS 애니메이션 주기 : `class` / `<Transition>`
+```vue
+<!-- class 적용 경우 -->
+<div class="start" :class="{ end : 모달창열렸니 }"> <!-- 조건부로 class명 부착 가능 -> 오른쪽이 true 혹은 true와 비슷한 자료일 때 부착됨 -->
+  <Modal :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른상품번호 = $event"/>
+</div>
+
+<!-- Transition 태그 적용 경우 -->
+<Transition name="fade">
+  <Modal :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른상품번호 = $event"/>
+</Transition>
+```
+```css
+/* 등장 애니메이션 */
+.fade-enter-from { /* 애니메이션 동작 전 상태 */
+  opacity: 0;
+}
+.fade-enter-active { /* 애니메이션 동작 중 상태 */
+  transition: all 1s;
+}
+.fade-enter-to { /* 애니메이션 동작 후 상태 */
+  opacity: 1;
+}
+```
+* 라이프사이클에 따른 화면 구성

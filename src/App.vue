@@ -1,6 +1,8 @@
 <template>
   <!-- 모달창 -->
-  <Modal :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른상품번호 = $event" />
+  <Transition name="fade">
+    <Modal :원룸들="원룸들" :누른상품번호="누른상품번호" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른상품번호 = $event"/>
+  </Transition>
 <!--  @openModal="모달창열렸니 = true; 누른상품번호 = $event"-->
   <!-- v-if 와 v-else-if 와 v-else
   : v-if가 참이 아니면 v-else를 보여주세요
@@ -39,12 +41,16 @@
   </div>-->
 
   <!-- 이벤트 -->
-  <Discount/>
+  <Discount v-if="showDiscount == true"/>
   <!--
    HTML 한 단어로 줄이고 싶으면 Component 만들기
    1. vue 파일 만들어서 HTML 넣고
    2. 원하는 곳에서 그 파일 import/등록/사용
    -->
+
+  <button @click="priceSort">가격순정렬</button>
+  <button @click="sortBack">원래대로</button>
+
 
   <div>
     <img src="./assets/room0.jpg" class="room-img">
@@ -105,15 +111,32 @@ export default {
       누른상품번호 : 0,
 
       products : ['역삼동원룸','천호동원룸','마포구원룸'],
+      원룸들오리지널 : [...data],
       원룸들 : data,
+      showDiscount : true,
     }
   },
 
   methods : { /* Vue에서 함수만들고 싶을 때 */
     increase(){
       this.신고수++;
-    }
+    },
+    sortBack(){
+      // this.원룸들 = this.원룸들오리지널; /* 버튼 몇 번 누르다보면 제대로 동작하지 않음 => 등호로 array를 집어넣으면 왼쪽 오른쪽 값 공유해주세요라는 뜻임 */
+      this.원룸들 = [...this.원룸들오리지널];
+    },
+    priceSort(){
+      this.원룸들.sort(function(a,b){
+        return a.price - b.price;
+      });
+    },
   },
+
+  /* mounted(){
+    setTimeout(() => {
+      this.showDiscount = false;
+    },2000);
+  },*/
 
   components: { /*컴포넌트 등록*/
     Discount : Discount,
@@ -126,6 +149,38 @@ export default {
 
 
 <style>
+.start {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.end {
+  opacity: 1;
+}
+
+/* 퇴장 애니메이션 */
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 등장 애니메이션 */
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+
 body {
   margin: 0;
 }
