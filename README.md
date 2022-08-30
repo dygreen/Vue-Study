@@ -92,7 +92,7 @@ export default {
   opacity: 1;
 }
 ```
-* 라이프사이클에 따른 기능 추가
+* 라이프사이클에 따른 기능 추가 (페이지 등장시 퍼센트 숫자 줄어듦, .input창 입력시 값에 따른 alert창 띄움)
 ```vue
 export default {
   beforeUpdate(){
