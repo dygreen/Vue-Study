@@ -14,6 +14,7 @@
   <!-- props보내고 싶을 때 => 콜론을 안붙이면 문자로 전달됨
    작명 = "문자자료"
    :작명 = "숫자자료"
+   1. 보내고 2. 등록하고 3. 사용하기
 
   <Discount :데이터이름="[1,2,3]" />
   <Discount :데이터이름="{ age:20 }" />
@@ -138,7 +139,9 @@ export default {
     },2000);
   },*/
 
-  components: { /*컴포넌트 등록*/
+  components: { /*컴포넌트 등록
+  1. import하고 2. 등록하고 3. <쓰셈/>
+  */
     Discount : Discount,
     Modal : Modal,
     Cards : Cards,

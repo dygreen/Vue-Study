@@ -90,4 +90,21 @@ export default {
   opacity: 1;
 }
 ```
-* 라이프사이클에 따른 화면 구성
+* 라이프사이클에 따른 기능 추가
+```vue
+export default {
+  beforeUpdate(){
+    if( this.month == 2 ){
+      alert('2개월은 너무 적습니다..');
+    }
+  }
+
+mounted() {
+  setInterval(() => {
+    if ( this.percent > 0 ){
+      this.percent--;
+    }
+    },1000);
+  }
+}
+```

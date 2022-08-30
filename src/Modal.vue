@@ -26,7 +26,7 @@
     },
 
     beforeUpdate(){
-      if(this.month == 2){
+      if( this.month == 2 ){
         alert('2개월은 너무 적습니다..');
       }
     },
