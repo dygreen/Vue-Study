@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <h5>{{ 블로그글[0].title }}</h5>
-    <p>{{ 블로그글[0].date }}</p>
-  </div>
-  <div>
-    <h5>{{ 블로그글[1].title }}</h5>
-    <p>{{ 블로그글[1].date }}</p>
-  </div>
-  <div>
-    <h5>{{ 블로그글[2].title }}</h5>
-    <p>{{ 블로그글[2].date }}</p>
+  <!-- 
+    $route : 현재 경로
+    $router : 페이지 이동관련 기능 ($router.go(1) | $router.push())
+
+    https://router.vuejs.org/guide/essentials/named-views.html
+   -->
+  <div v-for="(lists,i) in 블로그글" :key="i">
+    <h5 @click="$router.push(`/detail/${i}`)">{{ 블로그글[i].title }}</h5>
+    <p>{{ 블로그글[i].date }}</p>
   </div>
 </template>
 
@@ -23,5 +21,4 @@
 </script>
 
 <style>
-
 </style>

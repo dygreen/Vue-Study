@@ -2,7 +2,8 @@
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Blog</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -27,8 +28,12 @@
   <!--  router 링크 이동 -->
   <router-link to="/">홈페이지</router-link>
   <router-link to="/list">리스트페이지</router-link>
+  <router-link to="/detail">디테일페이지</router-link>
 
-  <router-view :블로그글="블로그글"></router-view>
+  <div class="mt-4">
+    <router-view :블로그글="블로그글"></router-view> <!-- 모든 router들의 내부 내용들... -->
+  </div>
+
 
   <!-- <List :블로그글="블로그글" /> -->
 </template>
